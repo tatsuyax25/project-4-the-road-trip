@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { Header, Segment, Image, Icon, Form, Grid, Button } from 'semantic-ui-react';
+import { Header, Segment, Image, Form, Grid, Button } from 'semantic-ui-react';
 
 export default function SignUpPage(props) {
 
