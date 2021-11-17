@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { Header, Segment, Image, Form, Grid, Button } from 'semantic-ui-react';
+import { useNavigate, Link } from 'react-router-dom';
+import { Header, Segment, Image, Form, Grid, Button, Message } from 'semantic-ui-react';
 
 export default function SignUpPage(props) {
 
@@ -13,12 +14,18 @@ export default function SignUpPage(props) {
     bio: ''
   });
 
-  function handleChange() {
+  const [selectedFile, setSelectedFile] = useState('')
 
+  function handleChange(e) {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
   }
 
-  function handleFileInput() {
-
+  function handleFileInput(e) {
+    console.log(e.target.files)
+    setSelectedFile(e.target.files[0])
   }
 
   function handleSubmit() {
@@ -84,6 +91,9 @@ export default function SignUpPage(props) {
             <Button type="submit" className="btn">
               Signup
             </Button>
+            <Message>
+            Have an account? <Link to="/login">Login</Link>
+          </Message>
           </Segment>
           {error ? <ErrorMessage error={error} /> : null}
         </Form>
