@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { useNavigate, Link } from 'react-router-dom';
 import { Header, Segment, Image, Form, Grid, Button, Message } from 'semantic-ui-react';
+import userService from '../../utils/userService';
 
 export default function SignUpPage(props) {
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
   const [state, setState] = useState({
@@ -28,7 +31,26 @@ export default function SignUpPage(props) {
     setSelectedFile(e.target.files[0])
   }
 
-  function handleSubmit() {
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    const formData = new FormData();
+    formData.append('photo', selectedFile)
+
+    for (let key in state){
+      formData.append(key, state[key])
+    }
+
+    console.log(formData, " <- This will show nothing")
+    console.log(formData.forEach((item) => console.log(item)))
+
+    try {
+      await userService.signup(formData)
+      props.handleSignUpOrLogin()
+      navigate('/')
+    } catch(err){
+      setError(err.message)
+    }
 
   }
 
