@@ -1,17 +1,59 @@
-import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
+import ProfilePage from '../ProfilePage/ProfilePage';
+import userService from '../../utils/userService';
+import Feed from "../Feed/Feed"
+import Layout from '../Layout/Layout';
 
 function App() {
-  return (
+  // decode our jwt token
+  const [user, setUser] = useState(userService.getUser());
+  // store the payload, aka the users info in state
+
+  function handleLogout() {
+    userService.logout();
+    setUser(null);
+  }
+
+  if (user) {
+    return (
       <Routes>
-          <Route path='/' element={<h1>Home Page</h1>} />
-          <Route path="/login" element={<LoginPage />} />
-          
-          <Route path="/signup" element={<SignupPage />} />
+        <Route
+          path="/"
+          element={<Layout user={user} handleLogout={handleLogout} />}
+        >
+          <Route index element={<Feed user={user} />}></Route>
+          <Route
+            path="/login"
+            element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          />
+
+          <Route
+            path="/signup"
+            element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+          />
+          <Route path="/:username" element={<ProfilePage user={user} />} />
+        </Route>
       </Routes>
+    );
+  }
+
+  return (
+    <Routes>
+      <Route
+        path="/login"
+        element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+
+      <Route
+        path="/signup"
+        element={<SignupPage handleSignUpOrLogin={handleSignUpOrLogin} />}
+      />
+      <Route path="/*" element={<Navigate to="/login" />} />
+    </Routes>
   );
 }
 
