@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Grid, Segment } from 'semantic-ui-react';
 
-export default function addRoadTripForm(props) {
+export default function AddRoadTripForm(props) {
     const [selectedFile, setSelectedFile] = useState("");
     const [state, setState] = useState({
         caption: "",
