@@ -6,7 +6,7 @@ import PostFeed from "../../components/PostFeed/PostFeed";
 import { useParams } from "react-router-dom";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import userService from "../../utils/userService";
-import * as likeApi from "../../utils/likesApi";
+import * as likesApi from "../../utils/likesApi";
 
 export default function ProfilePage(props) {
     const [posts, setPosts] = useState([]);

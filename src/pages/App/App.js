@@ -13,6 +13,10 @@ function App() {
   const [user, setUser] = useState(userService.getUser());
   // store the payload, aka the users info in state
 
+  function handleSignUpOrLogin() {
+    setUser(userService.getUser());
+  }
+  
   function handleLogout() {
     userService.logout();
     setUser(null);
