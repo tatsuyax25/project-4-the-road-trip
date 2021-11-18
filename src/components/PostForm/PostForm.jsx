@@ -30,31 +30,31 @@ export default function addRoadTripForm(props) {
 
     return (
         <Grid textAlign="center" verticalAlign="middle">
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Segment>
-              <Form autoComplete="off" onSubmit={handleSubmit}>
-                <Form.Input
-                  className="form-control"
-                  name="caption"
-                  value={state.caption}
-                  placeholder="What's on your pups mind?"
-                  onChange={handleChange}
-                  required
-                />
-                <Form.Input
-                  className="form-control"
-                  type="file"
-                  name="photo"
-                  placeholder="upload image"
-                  onChange={handleFileInput}
-                />
-                <Button type="submit" className="btn">
-                  ADD PUPPY
-                </Button>
-              </Form>
-            </Segment>
-          </Grid.Column>
+            <Grid.Column style={{ maxWidth: 450 }}>
+                <Segment>
+                    <Form autoComplete="off" onSubmit={handleSubmit}>
+                        <Form.Input
+                            className="form-control"
+                            name="caption"
+                            value={state.caption}
+                            placeholder="What's on your pups mind?"
+                            onChange={handleChange}
+                            required
+                        />
+                        <Form.Input
+                            className="form-control"
+                            type="file"
+                            name="photo"
+                            placeholder="upload image"
+                            onChange={handleFileInput}
+                        />
+                        <Button type="submit" className="btn">
+                            ADD PUPPY
+                        </Button>
+                    </Form>
+                </Segment>
+            </Grid.Column>
         </Grid>
-      );
+    );
 
 }
