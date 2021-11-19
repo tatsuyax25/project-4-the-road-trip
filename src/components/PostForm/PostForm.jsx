@@ -37,7 +37,7 @@ export default function AddRoadTripForm(props) {
                             className="form-control"
                             name="caption"
                             value={state.caption}
-                            placeholder="What's on your pups mind?"
+                            placeholder="What's on your road trip?"
                             onChange={handleChange}
                             required
                         />
@@ -49,7 +49,7 @@ export default function AddRoadTripForm(props) {
                             onChange={handleFileInput}
                         />
                         <Button type="submit" className="btn">
-                            ADD PUPPY
+                            ADD ROAD TRIP
                         </Button>
                     </Form>
                 </Segment>

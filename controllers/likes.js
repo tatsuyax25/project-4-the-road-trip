@@ -8,11 +8,14 @@ module.exports = {
 async function create(req, res){
 
     try {
+        console.log(req)
         const post = await Post.findById(req.params.id);
-        post.like.push({username: req.user.username, userId: req.user._id});
-        await post.save(201).json({data: 'like added'})
+        post.likes.push({username: req.user.username, userId: req.user._id});
+        await post.save()
+        res.status(201).json({data: 'like added'})
     } catch(err){
-        res.status(400).json({err})
+        console.log(err)
+        res.status(400).json(err)
     }
 }
 

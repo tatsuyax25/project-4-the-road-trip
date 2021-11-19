@@ -10,10 +10,14 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
 
     const likeColor = likeIndex > -1 ? "red" : "grey";
 
-    const clickHandler =
-        likeIndex > -1
-            ? () => removeLike(post.likes[likeIndex]._id)
-            : () => addLike(post._id);
+    function clickHandler() {
+        if (likeIndex > -1) {
+            removeLike(post.likes[likeIndex]._id)
+        } else { 
+            addLike(post._id);
+        }
+    }
+        
 
     const deleteHandler = (e) => {
         e.preventDefault()

@@ -27,6 +27,3 @@ export function getAll() {
     })
 }
 
-// export function delete() {
-//     console.log("delete")
-// }
