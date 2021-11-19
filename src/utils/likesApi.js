@@ -20,7 +20,7 @@ export function create(id) {
 }
 
 export function removeLike(id) {
-    return fetch(`${BASE_URL}likes/${id}`, {
+    return fetch(`${BASE_URL}${id}`, {
         method: "DELETE",
         headers: {
             Authorization: 'Bearer ' + tokenService.getToken(),
