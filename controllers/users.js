@@ -39,8 +39,9 @@ async function signup(req, res) {
   };
 
   s3.upload(params, async function (err, data) {
+    console.log(data, "<- this is data")
     console.log(err, '<- err from aws, are your keys and bucker correct?')
-    const user = new User({ ...req.body, photoUrl: data.location });
+    const user = new User({ ...req.body, photoUrl: data.Location });
     try {
       await user.save();
       const token = createJWT(user);
