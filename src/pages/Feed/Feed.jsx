@@ -10,6 +10,7 @@ import { Grid } from "semantic-ui-react";
 
 export default function Feed(props) {
     const [posts, setPosts] = useState([]);
+    console.log(posts)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     // Have a function that makes an api call to update the state

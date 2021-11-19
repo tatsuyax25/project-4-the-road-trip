@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
+
 function PostCard({ post, isProfile, user, removeLike, addLike }) {
     const likeIndex = post.likes.findIndex(
         (eachLike) => eachLike.username === user.username
@@ -13,6 +14,12 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
         likeIndex > -1
             ? () => removeLike(post.likes[likeIndex]._id)
             : () => addLike(post._id);
+
+    const deleteHandler = (e) => {
+        e.preventDefault()
+        console.log("click")
+
+    }
 
 
     return (
@@ -43,6 +50,7 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
             </Card.Content>
             <Card.Content extra textAlign={"right"}>
                 <Icon name={"heart"} size="large" color={likeColor} onClick={clickHandler} />
+                <Icon size="large" color="red" onClick={(e)=>{deleteHandler()}} />
                 {post.likes.length} Likes
             </Card.Content>
         </Card>

@@ -26,3 +26,7 @@ export function getAll() {
         throw new Error('Bad Credentials');
     })
 }
+
+// export function delete() {
+//     console.log("delete")
+// }

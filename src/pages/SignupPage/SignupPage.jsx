@@ -5,7 +5,7 @@ import { Header, Segment, Image, Form, Grid, Button, Message } from 'semantic-ui
 import userService from '../../utils/userService';
 
 export default function SignUpPage(props) {
-
+  console.log(props, "<- This is props")
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
@@ -45,11 +45,15 @@ export default function SignUpPage(props) {
     console.log(formData.forEach((item) => console.log(item)))
 
     try {
+      console.log([1])
       await userService.signup(formData)
+      console.log([2])
       props.handleSignUpOrLogin()
+      console.log([3])
       navigate('/')
     } catch(err){
       setError(err.message)
+      console.log('We have an error')
     }
 
   }

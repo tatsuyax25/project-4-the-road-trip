@@ -12,6 +12,7 @@ function App() {
   // decode our jwt token
   const [user, setUser] = useState(userService.getUser());
   // store the payload, aka the users info in state
+  console.log(user, "<- see post")
 
   function handleSignUpOrLogin() {
     setUser(userService.getUser());
