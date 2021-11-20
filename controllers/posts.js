@@ -8,6 +8,7 @@ const BUCKET_NAME = process.env.BUCKET_NAME;
 module.exports = {
     create,
     index,
+    deletePost
 };
 
 function create(req, res) {
@@ -26,6 +27,7 @@ function create(req, res) {
                 photoUrl: data.Location,
                 user: req.user
             });
+            await post.populate("user")
             res.status(201).json({ post: post });
         } catch (err) {
             res.status(400).json({ err });
@@ -46,5 +48,16 @@ async function index(req, res) {
         res.status(200).json({ posts: posts });
     } catch (err) {
         res.status(400).json({ err });
+    }
+}
+
+async function deletePost(req, res) {
+    try {
+        console.log(req.user, req.body)
+        const {id} = req.body
+        await Post.deleteOne({_id:id})
+        res.status(200).json({data:[]})
+    } catch (err) {
+        res.status(400).json({ err })
     }
 }
