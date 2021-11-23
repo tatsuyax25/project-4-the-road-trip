@@ -7,6 +7,9 @@ The website is an Instagram like site. Where you can add picture on their travel
 
 <img width="1330" alt="Screen Shot 2021-11-23 at 9 05 56 AM 1" src="https://user-images.githubusercontent.com/44272798/143070821-0705facd-9f45-4abf-bca0-72502ec39c8f.png">
 
+### Trello Link
+https://trello.com/b/GVUdz2lw
+
 ![Project 4 - The Road Trip - ERD with colored entities (UML notation)](https://user-images.githubusercontent.com/44272798/143070385-39decd79-01a0-417b-a575-13b4a03cfffc.jpeg)
 
 ![IMG_1763](https://user-images.githubusercontent.com/44272798/143074275-8c0e666c-08d6-48a7-910e-df7f45cc66c6.jpg)
