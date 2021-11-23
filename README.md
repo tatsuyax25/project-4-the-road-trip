@@ -9,6 +9,7 @@ The website is an Instagram like site. Where you can add picture on their travel
 
 ![Project 4 - The Road Trip - ERD with colored entities (UML notation)](https://user-images.githubusercontent.com/44272798/143070385-39decd79-01a0-417b-a575-13b4a03cfffc.jpeg)
 
+![IMG_1763](https://user-images.githubusercontent.com/44272798/143074275-8c0e666c-08d6-48a7-910e-df7f45cc66c6.jpg)
 
 ### Technology
 1. M.E.R.N Full-Stack
