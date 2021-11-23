@@ -5,8 +5,9 @@ A website which you can use to show pictures of your trips whether you travel do
 ### Discription
 The website is an Instagram like site. Where you can add picture on their travels.
 
-### [Project 4 - The Road Trip - ERD with colored entities (UML notation)]
-(https://user-images.githubusercontent.com/44272798/143061933-0f3e68ce-4473-4534-96c0-ed417f521328.jpeg)x
+<img width="1330" alt="Screen Shot 2021-11-23 at 9 05 56 AM 1" src="https://user-images.githubusercontent.com/44272798/143070821-0705facd-9f45-4abf-bca0-72502ec39c8f.png">
+
+![Project 4 - The Road Trip - ERD with colored entities (UML notation)](https://user-images.githubusercontent.com/44272798/143070385-39decd79-01a0-417b-a575-13b4a03cfffc.jpeg)
 
 ### Technology
 1. M.E.R.N Full-Stack
