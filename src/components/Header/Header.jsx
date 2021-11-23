@@ -32,13 +32,6 @@ export default function PageHeader({ user, handleLogout }) {
                 </Menu.Item>
 
                 <Menu.Item
-                    name='about'
-                    href='/about'
-                >
-                    About
-                </Menu.Item>
-
-                <Menu.Item
                     name='profile'
                     href={`/${user.username}`}
                 >
