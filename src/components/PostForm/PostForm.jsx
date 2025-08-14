@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Grid, Segment } from 'semantic-ui-react';
+
 
 export default function AddRoadTripForm(props) {
     const [selectedFile, setSelectedFile] = useState("");
@@ -29,8 +29,8 @@ export default function AddRoadTripForm(props) {
     }
 
     return (
-        <Grid textAlign="center" verticalAlign="middle">
-            <Grid.Column style={{ maxWidth: 450 }}>
+        <div className="ui grid" textAlign="center" verticalAlign="middle">
+            <div className="ui grid".Column style={{ maxWidth: 450 }}>
                 <Segment>
                     <Form autoComplete="off" onSubmit={handleSubmit}>
                         <Form.Input
@@ -48,13 +48,13 @@ export default function AddRoadTripForm(props) {
                             placeholder="upload image"
                             onChange={handleFileInput}
                         />
-                        <Button type="submit" className="btn">
+                        <button className="ui button" type="submit" className="btn">
                             ADD ROAD TRIP
-                        </Button>
+                        </button>
                     </Form>
                 </Segment>
             </Grid.Column>
-        </Grid>
+        </div>
     );
 
 }

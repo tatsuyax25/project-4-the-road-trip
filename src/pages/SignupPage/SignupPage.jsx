@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import { useNavigate, Link } from 'react-router-dom';
-import { Header, Segment, Image, Form, Grid, Button, Message } from 'semantic-ui-react';
+
 import userService from '../../utils/userService';
 
 export default function SignUpPage(props) {
@@ -61,10 +61,10 @@ export default function SignUpPage(props) {
 
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
+    <div className="ui grid" textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+      <div className="ui grid".Column style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
-          <Image src="https://imgur.com/CqDuz0m.png" /> Sign Up
+          <img className="ui image" src="https://imgur.com/CqDuz0m.png" /> Sign Up
         </Header>
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Segment stacked>
@@ -114,9 +114,9 @@ export default function SignUpPage(props) {
                 onChange={handleFileInput}
               />
             </Form.Field>
-            <Button type="submit" className="btn">
+            <button className="ui button" type="submit" className="btn">
               Signup
-            </Button>
+            </button>
             <Message>
             Have an account? <Link to="/login">Login</Link>
           </Message>
@@ -124,6 +124,6 @@ export default function SignUpPage(props) {
           {error ? <ErrorMessage error={error} /> : null}
         </Form>
       </Grid.Column>
-    </Grid>
+    </div>
   );
 }

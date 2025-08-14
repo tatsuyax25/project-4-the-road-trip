@@ -6,7 +6,7 @@ import PostForm from "../../components/PostForm/PostForm";
 import * as postsApi from "../../utils/postApi";
 import * as likesApi from "../../utils/likesApi";
 
-import { Grid } from "semantic-ui-react";
+
 
 export default function Feed(props) {
     const [posts, setPosts] = useState([]);
@@ -81,14 +81,14 @@ export default function Feed(props) {
     }
 
     return (
-        <Grid centered>
-            <Grid.Row>
-                <Grid.Column style={{ maxWidth: 450 }}>
+        <div className="ui grid" centered>
+            <div className="ui grid".Row>
+                <div className="ui grid".Column style={{ maxWidth: 450 }}>
                     <PostForm handleAddPost={handleAddPost} />
                 </Grid.Column>
             </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{ maxWidth: 450 }}>
+            <div className="ui grid".Row>
+                <div className="ui grid".Column style={{ maxWidth: 450 }}>
                     <PostFeed
                         posts={posts}
                         isProfile={false}
@@ -100,6 +100,6 @@ export default function Feed(props) {
                     />
                 </Grid.Column>
             </Grid.Row>
-        </Grid>
+        </div>
     );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "semantic-ui-react";
+
 import Loading from "../../components/Loader/Loader";
 import ProfileBio from "../../components/ProfileBio/ProfileBio";
 import PostFeed from "../../components/PostFeed/PostFeed";
@@ -67,14 +67,14 @@ export default function ProfilePage(props) {
     }
 
     return (
-        <Grid centered>
-            <Grid.Row>
-                <Grid.Column>
+        <div className="ui grid" style={{justifyContent: 'center'}}>
+            <div className="row">
+                <div className="ui column">
                     <ProfileBio user={user} />
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{ maxWidth: 750 }}>
+                </div>
+            </div>
+            <div className="row">
+                <div className="ui column" style={{ maxWidth: 750 }}>
                     <PostFeed
                         isProfile={true}
                         posts={posts}
@@ -83,8 +83,8 @@ export default function ProfilePage(props) {
                         addLike={addLike}
                         removeLike={removeLike}
                     />
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
+                </div>
+            </div>
+        </div>
     );
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Header, Segment, Image, Icon } from 'semantic-ui-react';
+
 import { Menu, Button } from 'semantic-ui-react'
 
 
@@ -13,7 +13,7 @@ export default function PageHeader({ user, handleLogout }) {
         //             <Link to='' onClick={handleLogout}>Logout</Link>
         //         </Header>
         //         <Header as='h3' floated='left'>
-        //             <Link to={`/${user.username}`}><Image src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar></Image></Link>          
+        //             <Link to={`/${user.username}`}><img className="ui image" src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar></img></Link>          
         //         </Header>
         //     </Segment>
         // )
@@ -21,7 +21,7 @@ export default function PageHeader({ user, handleLogout }) {
         return (
             <Menu inverted>
                 {user && <Menu.Item href={`/${user.username}`}>
-                    <Image src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar />
+                    <img className="ui image" src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar />
                 </Menu.Item>}
 
                 <Menu.Item
@@ -43,7 +43,7 @@ export default function PageHeader({ user, handleLogout }) {
                 </Menu.Item>
 
                 <Menu.Item position='right'>
-                    <Button onClick={handleLogout}>Logout</Button>
+                    <button className="ui button" onClick={handleLogout}>Logout</button>
                 </Menu.Item>
                 
             </Menu>

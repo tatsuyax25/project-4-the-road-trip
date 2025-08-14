@@ -1,12 +1,12 @@
 import React from 'react';
-import { Image, Grid, Segment } from 'semantic-ui-react';
+
 
 export default function ProfileBio({ user }) {
     return (
-        <Grid textAlign="center" columns={2} className="Profile">
-            <Grid.Row>
-                <Grid.Column>
-                    <Image
+        <div className="ui grid" textAlign="center" columns={2} className="Profile">
+            <div className="ui grid".Row>
+                <div className="ui grid".Column>
+                    <img className="ui image"
                         src={`${user.photoUrl
                                 ? user.photoUrl
                                 : "https://react.semantic-ui.com/images/wireframe/square-image.png"
@@ -15,7 +15,7 @@ export default function ProfileBio({ user }) {
                         size="small"
                     />
                 </Grid.Column>
-                <Grid.Column textAlign="left" style={{ maxWidth: 450 }}>
+                <div className="ui grid".Column textAlign="left" style={{ maxWidth: 450 }}>
                     <Segment vertical>
                         <h3>{user.username}</h3>
                     </Segment>
@@ -24,6 +24,6 @@ export default function ProfileBio({ user }) {
                     </Segment>
                 </Grid.Column>
             </Grid.Row>
-        </Grid>
+        </div>
     );
 }
