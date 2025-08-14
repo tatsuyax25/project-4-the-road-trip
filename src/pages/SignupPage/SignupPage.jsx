@@ -123,7 +123,7 @@ export default function SignUpPage(props) {
           </Segment>
           {error ? <ErrorMessage error={error} /> : null}
         </Form>
-      </Grid.Column>
+      </div>
     </div>
   );
 }

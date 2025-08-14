@@ -8,13 +8,13 @@ export default function Layout({user, handleLogout}) {
       <div className="row">
         <div className="ui column">
           <Header user={user} handleLogout={handleLogout}/>
-        </Grid.Column>
-      </Grid.Row>
+        </div>
+      </div>
       <div className="row">
         <div className="ui column">
           <Outlet />
-        </Grid.Column>
-      </Grid.Row>
+        </div>
+      </div>
     </div>
   );
 }

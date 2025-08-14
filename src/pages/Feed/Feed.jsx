@@ -81,12 +81,12 @@ export default function Feed(props) {
     }
 
     return (
-        <div className="ui grid" centered>
+        <div className="ui grid" style={{justifyContent: 'center'}}>
             <div className="row">
                 <div className="ui column" style={{ maxWidth: 450 }}>
                     <PostForm handleAddPost={handleAddPost} />
-                </Grid.Column>
-            </Grid.Row>
+                </div>
+            </div>
             <div className="row">
                 <div className="ui column" style={{ maxWidth: 450 }}>
                     <PostFeed
@@ -98,8 +98,8 @@ export default function Feed(props) {
                         addLike={addLike}
                         removeLike={removeLike}
                     />
-                </Grid.Column>
-            </Grid.Row>
+                </div>
+            </div>
         </div>
     );
 }

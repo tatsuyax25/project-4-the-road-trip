@@ -81,7 +81,7 @@ export default function LoginPage(props) {
             New to us? <Link to="/signup">Sign Up</Link>
           </Message>
           {error ? <ErrorMessage error={error} /> : null}
-        </Grid.Column>
+        </div>
       </div>
     </>
   );

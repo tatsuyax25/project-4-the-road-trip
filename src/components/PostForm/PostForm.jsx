@@ -53,7 +53,7 @@ export default function AddRoadTripForm(props) {
                         </button>
                     </Form>
                 </Segment>
-            </Grid.Column>
+            </div>
         </div>
     );
 
