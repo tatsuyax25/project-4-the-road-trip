@@ -1,0 +1,118 @@
+/* Simple UI replacement for semantic-ui */
+.ui.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.ui.column {
+  flex: 1;
+  padding: 1rem;
+}
+
+.ui.segment {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.ui.button {
+  background: #2185d0;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.ui.button:hover {
+  background: #1678c2;
+}
+
+.ui.form {
+  margin: 1rem 0;
+}
+
+.ui.form .field {
+  margin: 1rem 0;
+}
+
+.ui.form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.ui.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.ui.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.ui.image.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.ui.header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.ui.message {
+  background: #f8f8f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.ui.message.error {
+  background: #fff6f6;
+  border-color: #e0b4b4;
+  color: #9f3a38;
+}
+
+.ui.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ui.menu {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+}
+
+.ui.menu .item {
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.ui.icon {
+  font-size: 1.2rem;
+}

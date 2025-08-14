@@ -1,13 +1,10 @@
-import { Grid, Loader } from 'semantic-ui-react'
-
 export default function Loading() {
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Loader size="large" active>
-          Loading
-        </Loader>
-      </Grid.Column>
-    </Grid>
+    <div className="ui grid" style={{ height: "100vh", alignItems: "center", justifyContent: "center" }}>
+      <div className="ui column" style={{ maxWidth: 450, textAlign: "center" }}>
+        <div className="ui loader"></div>
+        <p>Loading</p>
+      </div>
+    </div>
   );
 }

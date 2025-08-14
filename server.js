@@ -26,7 +26,13 @@ app.use(express.json());
 // Serve static files from build directory
 const buildPath = path.join(__dirname, 'build');
 console.log('Build path:', buildPath);
-console.log('Build directory exists:', require('fs').existsSync(buildPath));
+const buildExists = require('fs').existsSync(buildPath);
+console.log('Build directory exists:', buildExists);
+
+if (!buildExists) {
+  console.error('ERROR: Build directory not found! The React app was not built properly.');
+  console.error('Make sure your Render build command is: npm install --legacy-peer-deps && npm run build');
+}
 
 app.use(express.static(buildPath));
 
