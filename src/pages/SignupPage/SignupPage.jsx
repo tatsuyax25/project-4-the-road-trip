@@ -33,106 +33,199 @@ export default function SignUpPage(props) {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    
+    // Validate passwords match
+    if (state.password !== state.passwordConf) {
+      setError('Passwords do not match!');
+      return;
+    }
+    
+    // Validate password length
+    if (state.password.length < 6) {
+      setError('Password must be at least 6 characters long!');
+      return;
+    }
 
     const formData = new FormData();
-    formData.append('photo', selectedFile)
+    if (selectedFile) {
+      formData.append('photo', selectedFile);
+    }
 
     for (let key in state){
       formData.append(key, state[key])
     }
 
-    console.log(formData, " <- This will show nothing")
-    console.log(formData.forEach((item) => console.log(item)))
-
     try {
-      console.log([1])
+      setError(''); // Clear any previous errors
       await userService.signup(formData)
-      console.log([2])
       props.handleSignUpOrLogin()
-      console.log([3])
       navigate('/')
     } catch(err){
-      setError(err.message)
-      console.log('We have an error')
+      console.error('Signup error:', err);
+      setError(err.message || 'Signup failed. Please try again.');
     }
-
   }
 
 
 
   return (
-    <div className="ui grid" style={{ height: "100vh", textAlign: "center", alignItems: "center", justifyContent: "center" }}>
-      <div className="ui column" style={{ maxWidth: 450 }}>
-        <h2 className="ui header" style={{color: "teal", textAlign: "center"}}>
-          <img className="ui image" src="https://imgur.com/CqDuz0m.png" alt="logo" /> Sign Up
-        </h2>
-        <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
-          <div className="ui segment">
-            <div className="field">
-              <input
-                name="username"
-                placeholder="username"
-                value={state.username}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="field">
-              <input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={state.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="field">
-              <input
-                name="password"
-                type="password"
-                placeholder="password"
-                value={state.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="field">
-              <input
-                name="passwordConf"
-                type="password"
-                placeholder="Confirm Password"
-                value={state.passwordConf}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="field">
-              <label>Bio</label>
-              <textarea
-                name="bio"
-                value={state.bio}
-                placeholder="Tell us more about your road trip..."
-                onChange={handleChange}
-              />
-            </div>
-            <div className="field">
-              <input
-                type="file"
-                name="photo"
-                placeholder="upload image"
-                onChange={handleFileInput}
-              />
-            </div>
-            <button className="ui button" type="submit">
-              Signup
-            </button>
-            <div className="ui message">
-              Have an account? <Link to="/login">Login</Link>
-            </div>
+    <div style={{ 
+      minHeight: "100vh", 
+      display: "flex", 
+      alignItems: "center", 
+      justifyContent: "center",
+      backgroundColor: "#f5f5f5",
+      padding: "20px"
+    }}>
+      <div style={{ 
+        maxWidth: "450px", 
+        width: "100%",
+        backgroundColor: "white",
+        borderRadius: "8px",
+        boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+        padding: "30px"
+      }}>
+        <div style={{ textAlign: "center", marginBottom: "30px" }}>
+          <h2 style={{ color: "#2185d0", marginBottom: "10px" }}>The Road Trip</h2>
+          <p style={{ color: "#666" }}>Sign up to share your adventures</p>
+        </div>
+        
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              style={{
+                width: "100%",
+                padding: "12px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px"
+              }}
+              name="username"
+              placeholder="Username"
+              value={state.username}
+              onChange={handleChange}
+              required
+            />
           </div>
-          {error ? <ErrorMessage error={error} /> : null}
+          
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              style={{
+                width: "100%",
+                padding: "12px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px"
+              }}
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={state.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              style={{
+                width: "100%",
+                padding: "12px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px"
+              }}
+              name="password"
+              type="password"
+              placeholder="Password"
+              value={state.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div style={{ marginBottom: "15px" }}>
+            <input
+              style={{
+                width: "100%",
+                padding: "12px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px"
+              }}
+              name="passwordConf"
+              type="password"
+              placeholder="Confirm Password"
+              value={state.passwordConf}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <div style={{ marginBottom: "15px" }}>
+            <textarea
+              style={{
+                width: "100%",
+                padding: "12px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px",
+                minHeight: "80px",
+                resize: "vertical"
+              }}
+              name="bio"
+              value={state.bio}
+              placeholder="Tell us about your road trips..."
+              onChange={handleChange}
+            />
+          </div>
+          
+          <div style={{ marginBottom: "20px" }}>
+            <label style={{ display: "block", marginBottom: "5px", fontSize: "14px", color: "#333" }}>Profile Photo</label>
+            <input
+              style={{
+                width: "100%",
+                padding: "8px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                fontSize: "14px"
+              }}
+              type="file"
+              name="photo"
+              accept="image/*"
+              onChange={handleFileInput}
+            />
+          </div>
+          
+          <button 
+            style={{
+              width: "100%",
+              padding: "12px",
+              backgroundColor: "#2185d0",
+              color: "white",
+              border: "none",
+              borderRadius: "4px",
+              fontSize: "16px",
+              cursor: "pointer",
+              marginBottom: "15px"
+            }}
+            type="submit"
+          >
+            Sign Up
+          </button>
         </form>
+        
+        <div style={{ 
+          textAlign: "center", 
+          padding: "15px", 
+          backgroundColor: "#f8f9fa", 
+          borderRadius: "4px",
+          fontSize: "14px"
+        }}>
+          Already have an account? <Link to="/login" style={{ color: "#2185d0", textDecoration: "none" }}>Log In</Link>
+        </div>
+        
+        {error && <ErrorMessage error={error} />}
       </div>
     </div>
   );
