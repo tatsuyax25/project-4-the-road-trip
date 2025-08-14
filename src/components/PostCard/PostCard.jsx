@@ -27,37 +27,36 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
 
 
     return (
-        <Card key={post._id} raised>
+        <div className="ui card" key={post._id}>
             {isProfile ? (
                 ""
             ) : (
-                <Card.Content textAlign="left">
-                    <Card.Header>
+                <div className="content" style={{textAlign: "left"}}>
+                    <div className="header">
                         <Link to={`/${post.user.username}`}>
-                            <img className="ui image"
-                                size="large"
-                                avatar
+                            <img className="ui image avatar"
                                 src={
                                     post.user.photoUrl
                                         ? post.user.photoUrl
                                         : "https://react.semantic-ui.com/images/wireframe/square-image.png"
                                 }
+                                alt="avatar"
                             />
                             {post.user.username}
                         </Link>
-                    </Card.Header>
-                </Card.Content>
+                    </div>
+                </div>
             )}
-            <img className="ui image" src={`${post.photoUrl}`} wrapped ui={false} />
-            <Card.Content>
-                <Card.Description>{post.caption}</Card.Description>
-            </Card.Content>
-            <Card.Content extra textAlign={"right"}>
-                <Icon name={"heart"} size="large" color={likeColor} onClick={clickHandler} />
-                <Icon size="large" color="red" onClick={(e)=>{deleteHandler()}} />
+            <img className="ui image" src={`${post.photoUrl}`} alt="post" />
+            <div className="content">
+                <div className="description">{post.caption}</div>
+            </div>
+            <div className="content" style={{textAlign: "right"}}>
+                <span className="ui icon" style={{color: likeColor, cursor: "pointer"}} onClick={clickHandler}>♥</span>
+                <span className="ui icon" style={{color: "red", cursor: "pointer"}} onClick={(e)=>{deleteHandler()}}>🗑</span>
                 {post.likes.length} Likes
-            </Card.Content>
-        </Card>
+            </div>
+        </div>
     );
 }
 

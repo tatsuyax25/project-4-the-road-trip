@@ -12,14 +12,12 @@ export default function PostFeed({
     removeLike
 }) {
     return (
-        <Card.Group itemsPerRow={numPhotosCol} stackable>
+        <div className="ui cards" style={{display: 'grid', gridTemplateColumns: `repeat(${numPhotosCol}, 1fr)`, gap: '1rem'}}>
             {loading ? (
-                <Segment>
-                    <Dimmer active inverted>
-                        <Loader size="small">Loading</Loader>
-                    </Dimmer>
-                    <img className="ui image" src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png" />
-                </Segment>
+                <div className="ui segment">
+                    <div className="ui loader"></div>
+                    <p>Loading</p>
+                </div>
             ) : null}
             {posts.map((post) => {
                 return (
@@ -33,6 +31,6 @@ export default function PostFeed({
                     />
                 );
             })}
-        </Card.Group>
+        </div>
     )
 }

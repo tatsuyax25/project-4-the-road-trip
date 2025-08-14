@@ -5,13 +5,13 @@ import Header from "../../components/Header/Header";
 export default function Layout({user, handleLogout}) {
   return (
     <div className="ui grid">
-      <div className="ui grid".Row>
-        <div className="ui grid".Column>
+      <div className="row">
+        <div className="ui column">
           <Header user={user} handleLogout={handleLogout}/>
         </Grid.Column>
       </Grid.Row>
-      <div className="ui grid".Row>
-        <div className="ui grid".Column>
+      <div className="row">
+        <div className="ui column">
           <Outlet />
         </Grid.Column>
       </Grid.Row>

@@ -30,7 +30,7 @@ export default function AddRoadTripForm(props) {
 
     return (
         <div className="ui grid" textAlign="center" verticalAlign="middle">
-            <div className="ui grid".Column style={{ maxWidth: 450 }}>
+            <div className="ui column" style={{ maxWidth: 450 }}>
                 <Segment>
                     <Form autoComplete="off" onSubmit={handleSubmit}>
                         <Form.Input

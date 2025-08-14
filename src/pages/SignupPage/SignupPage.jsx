@@ -62,7 +62,7 @@ export default function SignUpPage(props) {
 
   return (
     <div className="ui grid" textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <div className="ui grid".Column style={{ maxWidth: 450 }}>
+      <div className="ui column" style={{ maxWidth: 450 }}>
         <Header as="h2" color="teal" textAlign="center">
           <img className="ui image" src="https://imgur.com/CqDuz0m.png" /> Sign Up
         </Header>

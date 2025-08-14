@@ -3,7 +3,7 @@ import React from 'react';
 
 const LoginForm = () => (
     <div className="ui grid" textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-      <div className="ui grid".Column style={{ maxWidth: 450 }}>
+      <div className="ui column" style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
           <img className="ui image" src='/logo.png' /> Log-in to your account
         </Header>

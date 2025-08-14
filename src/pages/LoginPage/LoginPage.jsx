@@ -43,7 +43,7 @@ export default function LoginPage(props) {
         style={{ height: "100vh" }}
         verticalAlign="middle"
       >
-        <div className="ui grid".Column style={{ maxWidth: 450 }}>
+        <div className="ui column" style={{ maxWidth: 450 }}>
           <Header as="h2" color="teal" textAlign="center">
             <img className="ui image" src="https://i.imgur.com/CqDuz0m.png" /> Log-in to your
             account

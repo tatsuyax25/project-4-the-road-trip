@@ -1,29 +1,27 @@
 import React from 'react';
 
-
 export default function ProfileBio({ user }) {
     return (
-        <div className="ui grid" textAlign="center" columns={2} className="Profile">
-            <div className="ui grid".Row>
-                <div className="ui grid".Column>
-                    <img className="ui image"
-                        src={`${user.photoUrl
+        <div className="ui grid Profile" style={{textAlign: "center"}}>
+            <div className="row">
+                <div className="ui column">
+                    <img className="ui image avatar"
+                        src={user.photoUrl
                                 ? user.photoUrl
                                 : "https://react.semantic-ui.com/images/wireframe/square-image.png"
-                            } `}
-                        avatar
-                        size="small"
+                            }
+                        alt="profile"
                     />
-                </Grid.Column>
-                <div className="ui grid".Column textAlign="left" style={{ maxWidth: 450 }}>
-                    <Segment vertical>
+                </div>
+                <div className="ui column" style={{textAlign: "left", maxWidth: 450}}>
+                    <div className="ui segment">
                         <h3>{user.username}</h3>
-                    </Segment>
-                    <Segment>
+                    </div>
+                    <div className="ui segment">
                         <span>Bio: {user.bio}</span>
-                    </Segment>
-                </Grid.Column>
-            </Grid.Row>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

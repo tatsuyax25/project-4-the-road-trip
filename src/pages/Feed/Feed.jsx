@@ -82,13 +82,13 @@ export default function Feed(props) {
 
     return (
         <div className="ui grid" centered>
-            <div className="ui grid".Row>
-                <div className="ui grid".Column style={{ maxWidth: 450 }}>
+            <div className="row">
+                <div className="ui column" style={{ maxWidth: 450 }}>
                     <PostForm handleAddPost={handleAddPost} />
                 </Grid.Column>
             </Grid.Row>
-            <div className="ui grid".Row>
-                <div className="ui grid".Column style={{ maxWidth: 450 }}>
+            <div className="row">
+                <div className="ui column" style={{ maxWidth: 450 }}>
                     <PostFeed
                         posts={posts}
                         isProfile={false}
