@@ -18,23 +18,37 @@ if (process.env.NODE_ENV === 'production') {
       app.use(favicon(faviconPath));
     }
   } catch (err) {
-    console.log('Favicon not found, skipping...');
+    console.error('Error loading favicon:', err.message);
   }
 }
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'build')));
+// Serve static files from build directory
+const buildPath = path.join(__dirname, 'build');
+console.log('Build path:', buildPath);
+console.log('Build directory exists:', require('fs').existsSync(buildPath));
+
+app.use(express.static(buildPath));
+
 // Configure the auth middleware
-// This decodes the jwt token, and assigns
-// the user information to req.user
 app.use(require('./config/auth')); 
-// api routes must be before the "catch all" route
+
+// API routes must be before the "catch all" route
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/likes', require('./routes/api/likes'));
-// "catch all" route
+
+// "catch all" route - serve React app
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  const indexPath = path.join(__dirname, 'build', 'index.html');
+  console.log('Serving index.html from:', indexPath);
+  console.log('Index.html exists:', require('fs').existsSync(indexPath));
+  
+  if (require('fs').existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(404).send('Build files not found. Make sure the app was built properly.');
+  }
 });
 
 const port = process.env.PORT || 3001;
