@@ -98,7 +98,9 @@ export default function SignUpPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               name="username"
               placeholder="Username"
@@ -115,7 +117,9 @@ export default function SignUpPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               type="email"
               name="email"
@@ -133,7 +137,9 @@ export default function SignUpPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               name="password"
               type="password"
@@ -151,7 +157,9 @@ export default function SignUpPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               name="passwordConf"
               type="password"
@@ -171,7 +179,9 @@ export default function SignUpPage(props) {
                 borderRadius: "4px",
                 fontSize: "14px",
                 minHeight: "80px",
-                resize: "vertical"
+                resize: "vertical",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               name="bio"
               value={state.bio}
@@ -188,7 +198,9 @@ export default function SignUpPage(props) {
                 padding: "8px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               type="file"
               name="photo"

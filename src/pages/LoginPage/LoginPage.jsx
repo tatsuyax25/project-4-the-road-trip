@@ -66,7 +66,9 @@ export default function LoginPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               type="email"
               name="email"
@@ -84,7 +86,9 @@ export default function LoginPage(props) {
                 padding: "12px",
                 border: "1px solid #ddd",
                 borderRadius: "4px",
-                fontSize: "14px"
+                fontSize: "14px",
+                boxSizing: "border-box",
+                margin: "0"
               }}
               name="password"
               type="password"
