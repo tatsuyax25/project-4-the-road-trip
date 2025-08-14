@@ -61,68 +61,78 @@ export default function SignUpPage(props) {
 
 
   return (
-    <div className="ui grid" textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
+    <div className="ui grid" style={{ height: "100vh", textAlign: "center", alignItems: "center", justifyContent: "center" }}>
       <div className="ui column" style={{ maxWidth: 450 }}>
-        <Header as="h2" color="teal" textAlign="center">
-          <img className="ui image" src="https://imgur.com/CqDuz0m.png" /> Sign Up
-        </Header>
-        <Form autoComplete="off" onSubmit={handleSubmit}>
-          <Segment stacked>
-            <Form.Input
-              name="username"
-              placeholder="username"
-              value={state.username}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              type="email"
-              name="email"
-              placeholder="email"
-              value={state.email}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              name="password"
-              type="password"
-              placeholder="password"
-              value={state.password}
-              onChange={handleChange}
-              required
-            />
-            <Form.Input
-              name="passwordConf"
-              type="password"
-              placeholder="Confirm Password"
-              value={state.passwordConf}
-              onChange={handleChange}
-              required
-            />
-            <Form.TextArea
-              label="bio"
-              name="bio"
-              value={state.bio}
-              placeholder="Tell us more about your road trip..."
-              onChange={handleChange}
-            />
-            <Form.Field>
-              <Form.Input
+        <h2 className="ui header" style={{color: "teal", textAlign: "center"}}>
+          <img className="ui image" src="https://imgur.com/CqDuz0m.png" alt="logo" /> Sign Up
+        </h2>
+        <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
+          <div className="ui segment">
+            <div className="field">
+              <input
+                name="username"
+                placeholder="username"
+                value={state.username}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="field">
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                value={state.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="field">
+              <input
+                name="password"
+                type="password"
+                placeholder="password"
+                value={state.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="field">
+              <input
+                name="passwordConf"
+                type="password"
+                placeholder="Confirm Password"
+                value={state.passwordConf}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="field">
+              <label>Bio</label>
+              <textarea
+                name="bio"
+                value={state.bio}
+                placeholder="Tell us more about your road trip..."
+                onChange={handleChange}
+              />
+            </div>
+            <div className="field">
+              <input
                 type="file"
                 name="photo"
                 placeholder="upload image"
                 onChange={handleFileInput}
               />
-            </Form.Field>
-            <button className="ui button" type="submit" className="btn">
+            </div>
+            <button className="ui button" type="submit">
               Signup
             </button>
-            <Message>
-            Have an account? <Link to="/login">Login</Link>
-          </Message>
-          </Segment>
+            <div className="ui message">
+              Have an account? <Link to="/login">Login</Link>
+            </div>
+          </div>
           {error ? <ErrorMessage error={error} /> : null}
-        </Form>
+        </form>
       </div>
     </div>
   );

@@ -1,58 +1,33 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-
-import { Menu, Button } from 'semantic-ui-react'
-
+import React from 'react';
 
 export default function PageHeader({ user, handleLogout }) {
     if (user) {
-        // return (
-        //     <Segment clearing>
-        //         <Header as='h3' floated='right'>
-        //             <Link to="/"><Icon name="camera"></Icon></Link>
-        //             <Link to='' onClick={handleLogout}>Logout</Link>
-        //         </Header>
-        //         <Header as='h3' floated='left'>
-        //             <Link to={`/${user.username}`}><img className="ui image" src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar></img></Link>          
-        //         </Header>
-        //     </Segment>
-        // )
-
         return (
-            <Menu inverted>
-                {user && <Menu.Item href={`/${user.username}`}>
-                    <img className="ui image" src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} avatar />
-                </Menu.Item>}
+            <div className="ui menu" style={{backgroundColor: '#1b1c1d', color: 'white'}}>
+                {user && <a className="ui menu item" href={`/${user.username}`}>
+                    <img className="ui image avatar" src={user.photoUrl ? user.photoUrl : "https://react.semantic-ui.com/images/wireframe/square-image.png"} alt="avatar" />
+                </a>}
 
-                <Menu.Item
-                    name='home'
-                    href='/'
-                >
+                <a className="ui menu item" href='/'>
                     Home
-                </Menu.Item>
+                </a>
 
-                <Menu.Item
-                    name='profile'
-                    href={`/${user.username}`}
-                >
+                <a className="ui menu item" href={`/${user.username}`}>
                     Profile
-                </Menu.Item>
+                </a>
 
-                <Menu.Item floated='right'>
-                    <Icon name="camera"></Icon>
-                </Menu.Item>
+                <div className="ui menu item" style={{marginLeft: 'auto'}}>
+                    <span className="ui icon">📷</span>
+                </div>
 
-                <Menu.Item position='right'>
+                <div className="ui menu item">
                     <button className="ui button" onClick={handleLogout}>Logout</button>
-                </Menu.Item>
-                
-            </Menu>
-
+                </div>
+            </div>
         )
     }
 
     return (
         <div></div>
     )
-
 }

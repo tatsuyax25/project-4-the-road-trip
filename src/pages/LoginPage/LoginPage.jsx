@@ -39,47 +39,46 @@ export default function LoginPage(props) {
   return (
     <>
       <div className="ui grid"
-        textAlign="center"
-        style={{ height: "100vh" }}
-        verticalAlign="middle"
+        style={{ height: "100vh", textAlign: "center", alignItems: "center", justifyContent: "center" }}
       >
         <div className="ui column" style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
-            <img className="ui image" src="https://i.imgur.com/CqDuz0m.png" /> Log-in to your
+          <h2 className="ui header" style={{color: "teal", textAlign: "center"}}>
+            <img className="ui image" src="https://i.imgur.com/CqDuz0m.png" alt="logo" /> Log-in to your
             account
-          </Header>
-          <Form autoComplete="off" onSubmit={handleSubmit}>
-            <Segment stacked>
-              <Form.Input
-                type="email"
-                name="email"
-                placeholder="email"
-                value={state.email}
-                onChange={handleChange}
-                required
-              />
-              <Form.Input
-                name="password"
-                type="password"
-                placeholder="password"
-                value={state.password}
-                onChange={handleChange}
-                required
-              />
+          </h2>
+          <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
+            <div className="ui segment">
+              <div className="field">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="email"
+                  value={state.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="field">
+                <input
+                  name="password"
+                  type="password"
+                  placeholder="password"
+                  value={state.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
               <button className="ui button"
-                color="teal"
-                fluid
-                size="large"
+                style={{backgroundColor: "teal", color: "white", width: "100%"}}
                 type="submit"
-                className="btn"
               >
                 Login
               </button>
-            </Segment>
-          </Form>
-          <Message>
+            </div>
+          </form>
+          <div className="ui message">
             New to us? <Link to="/signup">Sign Up</Link>
-          </Message>
+          </div>
           {error ? <ErrorMessage error={error} /> : null}
         </div>
       </div>

@@ -29,30 +29,34 @@ export default function AddRoadTripForm(props) {
     }
 
     return (
-        <div className="ui grid" textAlign="center" verticalAlign="middle">
+        <div className="ui grid" style={{textAlign: "center", alignItems: "center"}}>
             <div className="ui column" style={{ maxWidth: 450 }}>
-                <Segment>
-                    <Form autoComplete="off" onSubmit={handleSubmit}>
-                        <Form.Input
-                            className="form-control"
-                            name="caption"
-                            value={state.caption}
-                            placeholder="What's on your road trip?"
-                            onChange={handleChange}
-                            required
-                        />
-                        <Form.Input
-                            className="form-control"
-                            type="file"
-                            name="photo"
-                            placeholder="upload image"
-                            onChange={handleFileInput}
-                        />
-                        <button className="ui button" type="submit" className="btn">
+                <div className="ui segment">
+                    <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
+                        <div className="field">
+                            <input
+                                className="form-control"
+                                name="caption"
+                                value={state.caption}
+                                placeholder="What's on your road trip?"
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="field">
+                            <input
+                                className="form-control"
+                                type="file"
+                                name="photo"
+                                placeholder="upload image"
+                                onChange={handleFileInput}
+                            />
+                        </div>
+                        <button className="ui button" type="submit">
                             ADD ROAD TRIP
                         </button>
-                    </Form>
-                </Segment>
+                    </form>
+                </div>
             </div>
         </div>
     );
