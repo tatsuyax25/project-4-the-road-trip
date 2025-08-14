@@ -10,9 +10,16 @@ require('./config/database');
 
 const app = express();
 
-// Serve favicon in production
+// Serve favicon in production if it exists
+const faviconPath = path.join(__dirname, 'build', 'favicon.ico');
 if (process.env.NODE_ENV === 'production') {
-  app.use(favicon(path.join(__dirname, 'build', 'favicon.ico')));
+  try {
+    if (require('fs').existsSync(faviconPath)) {
+      app.use(favicon(faviconPath));
+    }
+  } catch (err) {
+    console.log('Favicon not found, skipping...');
+  }
 }
 app.use(logger('dev'));
 app.use(express.json());

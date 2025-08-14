@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Build script for Render deployment
 
-# Install dependencies with legacy peer deps
+# Install dependencies
 npm install --legacy-peer-deps
 
 # Build the React app
