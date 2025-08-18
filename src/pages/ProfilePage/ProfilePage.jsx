@@ -67,23 +67,18 @@ export default function ProfilePage(props) {
     }
 
     return (
-        <div className="ui grid" style={{justifyContent: 'center'}}>
-            <div className="row">
-                <div className="ui column">
-                    <ProfileBio user={user} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="ui column" style={{ maxWidth: 750 }}>
-                    <PostFeed
-                        isProfile={true}
-                        posts={posts}
-                        numPhotosCol={3}
-                        user={props.user}
-                        addLike={addLike}
-                        removeLike={removeLike}
-                    />
-                </div>
+        <div className="profile-page">
+            <ProfileBio user={user} />
+            
+            <div className="profile-posts">
+                <PostFeed
+                    isProfile={true}
+                    posts={posts}
+                    numPhotosCol={3}
+                    user={props.user}
+                    addLike={addLike}
+                    removeLike={removeLike}
+                />
             </div>
         </div>
     );
