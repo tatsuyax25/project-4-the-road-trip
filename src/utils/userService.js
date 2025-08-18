@@ -7,20 +7,22 @@ function signup(user) {
   console.log(user, "<- userService")
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
-    // headers: new Headers({'Content-Type': 'application/json'}),  // If you are sending a file/photo over
-    // what do datatype do you need to change this too?
     body: user
   })
   .then(res => {
     console.log(res)
     if (res.ok) return res.json();
-    // Probably a duplicate email
-    throw new Error('Email already taken!');
+    // Get the actual error message from the server
+    return res.json().then(errorData => {
+      throw new Error(errorData.message || errorData.error || 'Signup failed');
+    }).catch(() => {
+      // If response is not JSON, use status-based message
+      if (res.status === 400) throw new Error('Invalid signup data');
+      if (res.status === 409) throw new Error('Email or username already exists');
+      throw new Error('Signup failed. Please try again.');
+    });
   })
-  // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));
-  // The above could have been written as
-  //.then((token) => token.token);
 }
 
 function getUser() {
@@ -38,9 +40,15 @@ function login(creds) {
     body: JSON.stringify(creds)
   })
   .then(res => {
-    // Valid login if we have a status of 2xx (res.ok)
     if (res.ok) return res.json();
-    throw new Error('Bad Credentials!');
+    // Get the actual error message from the server
+    return res.json().then(errorData => {
+      throw new Error(errorData.message || errorData.error || 'Login failed');
+    }).catch(() => {
+      // If response is not JSON, use status-based message
+      if (res.status === 401) throw new Error('Invalid email or password');
+      throw new Error('Login failed. Please try again.');
+    });
   })
   .then(({token}) => tokenService.setToken(token));
 }

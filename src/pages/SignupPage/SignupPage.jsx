@@ -57,11 +57,23 @@ export default function SignUpPage(props) {
 
     try {
       setError(''); // Clear any previous errors
+      console.log('Attempting signup with:', {
+        username: state.username,
+        email: state.email,
+        bio: state.bio,
+        hasPhoto: !!selectedFile
+      });
+      
       await userService.signup(formData)
+      console.log('Signup successful!');
       props.handleSignUpOrLogin()
       navigate('/')
     } catch(err){
       console.error('Signup error:', err);
+      console.error('Error details:', {
+        message: err.message,
+        stack: err.stack
+      });
       setError(err.message || 'Signup failed. Please try again.');
     }
   }
