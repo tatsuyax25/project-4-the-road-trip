@@ -6,6 +6,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import ProfilePage from '../ProfilePage/ProfilePage';
 import userService from '../../utils/userService';
 import Feed from "../Feed/Feed"
+import AddPostPage from '../AddPostPage/AddPostPage';
 import Layout from '../Layout/Layout';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           element={<Layout user={user} handleLogout={handleLogout} />}
         >
           <Route index element={<Feed user={user} />}></Route>
+          <Route path="/add-post" element={<AddPostPage user={user} />} />
           <Route
             path="/login"
             element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />}

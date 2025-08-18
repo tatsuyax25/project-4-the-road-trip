@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import PostFeed from "../../components/PostFeed/PostFeed";
-import PostForm from "../../components/PostForm/PostForm";
+
 import * as postsApi from "../../utils/postApi";
 import * as likesApi from "../../utils/likesApi";
 
@@ -81,25 +81,16 @@ export default function Feed(props) {
     }
 
     return (
-        <div className="ui grid" style={{justifyContent: 'center'}}>
-            <div className="row">
-                <div className="ui column" style={{ maxWidth: 450 }}>
-                    <PostForm handleAddPost={handleAddPost} />
-                </div>
-            </div>
-            <div className="row">
-                <div className="ui column" style={{ maxWidth: 450 }}>
-                    <PostFeed
-                        posts={posts}
-                        isProfile={false}
-                        numPhotosCol={1}
-                        loading={loading}
-                        user={props.user}
-                        addLike={addLike}
-                        removeLike={removeLike}
-                    />
-                </div>
-            </div>
+        <div className="feed-container">
+            <PostFeed
+                posts={posts}
+                isProfile={false}
+                numPhotosCol={1}
+                loading={loading}
+                user={props.user}
+                addLike={addLike}
+                removeLike={removeLike}
+            />
         </div>
     );
 }

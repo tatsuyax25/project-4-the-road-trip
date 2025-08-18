@@ -29,34 +29,43 @@ export default function AddRoadTripForm(props) {
     }
 
     return (
-        <div className="ui grid" style={{textAlign: "center", alignItems: "center"}}>
-            <div className="ui column" style={{ maxWidth: 450 }}>
-                <div className="ui segment">
-                    <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
-                        <div className="field">
-                            <input
-                                className="form-control"
-                                name="caption"
-                                value={state.caption}
-                                placeholder="What's on your road trip?"
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="field">
-                            <input
-                                className="form-control"
-                                type="file"
-                                name="photo"
-                                placeholder="upload image"
-                                onChange={handleFileInput}
-                            />
-                        </div>
-                        <button className="ui button" type="submit">
-                            ADD ROAD TRIP
-                        </button>
-                    </form>
-                </div>
+        <div className="feed-container">
+            <div className="post-form">
+                <h3 style={{margin: '0 0 16px 0', color: '#262626'}}>Share Your Road Trip</h3>
+                <form className="ui form" autoComplete="off" onSubmit={handleSubmit}>
+                    <div className="field">
+                        <input
+                            name="caption"
+                            value={state.caption}
+                            placeholder="What's on your road trip?"
+                            onChange={handleChange}
+                            required
+                            style={{
+                                border: '1px solid #dbdbdb',
+                                borderRadius: '6px',
+                                padding: '12px',
+                                fontSize: '14px'
+                            }}
+                        />
+                    </div>
+                    <div className="field">
+                        <input
+                            type="file"
+                            name="photo"
+                            accept="image/*"
+                            onChange={handleFileInput}
+                            style={{
+                                border: '1px solid #dbdbdb',
+                                borderRadius: '6px',
+                                padding: '8px',
+                                fontSize: '14px'
+                            }}
+                        />
+                    </div>
+                    <button className="ui button" type="submit" style={{width: '100%'}}>
+                        📸 Share Road Trip
+                    </button>
+                </form>
             </div>
         </div>
     );

@@ -28,33 +28,49 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
 
     return (
         <div className="ui card" key={post._id}>
-            {isProfile ? (
-                ""
-            ) : (
-                <div className="content" style={{textAlign: "left"}}>
-                    <div className="header">
-                        <Link to={`/${post.user.username}`}>
-                            <img className="ui image avatar"
-                                src={
-                                    post.user.photoUrl
-                                        ? post.user.photoUrl
-                                        : "https://react.semantic-ui.com/images/wireframe/square-image.png"
-                                }
-                                alt="avatar"
-                            />
-                            {post.user.username}
-                        </Link>
-                    </div>
+            {!isProfile && (
+                <div className="post-header">
+                    <Link to={`/${post.user.username}`}>
+                        <img className="ui image avatar"
+                            src={
+                                post.user.photoUrl
+                                    ? post.user.photoUrl
+                                    : "https://react.semantic-ui.com/images/wireframe/square-image.png"
+                            }
+                            alt="avatar"
+                        />
+                        <span>{post.user.username}</span>
+                    </Link>
                 </div>
             )}
-            <img className="ui image" src={`${post.photoUrl}`} alt="post" />
-            <div className="content">
-                <div className="description">{post.caption}</div>
+            
+            <img className="post-image" src={`${post.photoUrl}`} alt="post" />
+            
+            <div className="post-content">
+                <p style={{margin: 0, fontSize: '14px', color: '#262626'}}>{post.caption}</p>
             </div>
-            <div className="content" style={{textAlign: "right"}}>
-                <span className="ui icon" style={{color: likeColor, cursor: "pointer"}} onClick={clickHandler}>♥</span>
-                <span className="ui icon" style={{color: "red", cursor: "pointer"}} onClick={(e)=>{deleteHandler()}}>🗑</span>
-                {post.likes.length} Likes
+            
+            <div className="post-actions">
+                <div className="post-likes">
+                    <span 
+                        className="ui icon" 
+                        style={{color: likeColor, fontSize: '20px'}} 
+                        onClick={clickHandler}
+                    >
+                        {likeIndex > -1 ? '❤️' : '🤍'}
+                    </span>
+                    <span style={{fontSize: '14px', color: '#8e8e8e'}}>
+                        {post.likes.length} {post.likes.length === 1 ? 'like' : 'likes'}
+                    </span>
+                </div>
+                
+                <span 
+                    className="ui icon" 
+                    style={{color: "#8e8e8e", fontSize: '18px'}} 
+                    onClick={deleteHandler}
+                >
+                    🗑️
+                </span>
             </div>
         </div>
     );
