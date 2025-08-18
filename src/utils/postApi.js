@@ -1,6 +1,6 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/posts/";
+const BASE_URL = "http://localhost:3001/api/posts/";
 
 export function create(post){
     return fetch(BASE_URL, {

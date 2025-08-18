@@ -29,9 +29,29 @@ async function profile(req, res) {
 
 async function signup(req, res) {
   console.log(req.body, req.file, "<- This is the body")
-  console.log(req)
+  
+  // Handle case where no photo is uploaded
+  if (!req.file) {
+    const user = new User({ ...req.body });
+    try {
+      await user.save();
+      const token = createJWT(user);
+      res.json({ token });
+    } catch (err) {
+      console.log(err, '<- signup error without photo');
+      if (err.code === 11000) {
+        const field = Object.keys(err.keyValue)[0];
+        const value = err.keyValue[field];
+        res.status(400).json({ message: `${field.charAt(0).toUpperCase() + field.slice(1)} '${value}' already exists` });
+      } else {
+        res.status(400).json({ message: err.message || 'Signup failed' });
+      }
+    }
+    return;
+  }
+  
+  // Handle photo upload
   const filePath = `${uuidv4()}/${req.file.originalname}`;
-
   const params = {
     Bucket: process.env.BUCKET_NAME,
     Key: filePath,
@@ -40,18 +60,29 @@ async function signup(req, res) {
 
   s3.upload(params, async function (err, data) {
     console.log(data, "<- this is data")
-    console.log(err, '<- err from aws, are your keys and bucker correct?')
+    console.log(err, '<- err from aws, are your keys and bucket correct?')
+    
+    if (err) {
+      console.log('AWS upload error:', err);
+      return res.status(500).json({ message: 'Photo upload failed' });
+    }
+    
     const user = new User({ ...req.body, photoUrl: data.Location });
     try {
       await user.save();
       const token = createJWT(user);
       res.json({ token });
     } catch (err) {
-      // Probably a duplicate email
-      res.status(400).json(err);
+      console.log(err, '<- signup error with photo');
+      if (err.code === 11000) {
+        const field = Object.keys(err.keyValue)[0];
+        const value = err.keyValue[field];
+        res.status(400).json({ message: `${field.charAt(0).toUpperCase() + field.slice(1)} '${value}' already exists` });
+      } else {
+        res.status(400).json({ message: err.message || 'Signup failed' });
+      }
     }
   });
-
 }
 
 async function login(req, res) {

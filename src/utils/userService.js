@@ -1,6 +1,6 @@
 import tokenService from './tokenService';
 
-const BASE_URL = '/api/users/';
+const BASE_URL = 'http://localhost:3001/api/users/';
 
 function signup(user) {
   console.log(JSON.stringify(user), "<- What we past in the body")
@@ -10,8 +10,13 @@ function signup(user) {
     body: user
   })
   .then(res => {
-    console.log(res)
-    if (res.ok) return res.json();
+    console.log('Signup response:', res.status, res.statusText);
+    if (res.ok) {
+      return res.json().catch(err => {
+        console.error('JSON parse error:', err);
+        throw new Error('Invalid response from server');
+      });
+    }
     // Get the actual error message from the server
     return res.json().then(errorData => {
       throw new Error(errorData.message || errorData.error || 'Signup failed');

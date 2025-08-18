@@ -1,6 +1,6 @@
 import tokenService from "./tokenService";
 
-const BASE_URL = "/api/likes/";
+const BASE_URL = "http://localhost:3001/api/likes/";
 
 export function create(id) {
     console.log(id, "<- this is my like")
