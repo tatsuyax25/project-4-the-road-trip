@@ -89,6 +89,13 @@ body {
   text-decoration: none;
   color: #262626;
   font-weight: 600;
+  gap: 12px;
+}
+
+.post-header a > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .post-header .ui.image.avatar {

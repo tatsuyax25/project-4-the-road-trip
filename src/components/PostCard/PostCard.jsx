@@ -103,7 +103,16 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                             }
                             alt="avatar"
                         />
-                        <span>{post.user.username}</span>
+                        <div>
+                            <span style={{fontWeight: '600'}}>{post.user.username}</span>
+                            <div style={{fontSize: '12px', color: '#8e8e8e'}}>
+                                {new Date(post.createdAt || Date.now()).toLocaleDateString('en-US', {
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric'
+                                })}
+                            </div>
+                        </div>
                     </Link>
                 </div>
             )}

@@ -18,10 +18,9 @@ export default function Feed(props) {
     async function handleAddPost(post) {
         try {
             setLoading(true);
-            const data = await postsApi.create(post); // our server is going to return
-            // the created post, that will be inside of data, which is th response from
-            // the server, we then want to set it in state
+            const data = await postsApi.create(post);
             console.log(data, " <- this is response from the server, in handleAddPost");
+            // Add new post at the beginning of the array (top of feed)
             setPosts([data.post, ...posts]);
             setLoading(false);
         } catch (err) {
@@ -78,7 +77,13 @@ export default function Feed(props) {
         try {
             showLoading ? setLoading(true) : setLoading(false)
             const data = await postsApi.getAll();
-            setPosts([...data.posts]);
+            // Sort posts by creation date, newest first
+            const sortedPosts = data.posts.sort((a, b) => {
+                const dateA = new Date(a.createdAt || 0);
+                const dateB = new Date(b.createdAt || 0);
+                return dateB - dateA; // Newest first
+            });
+            setPosts([...sortedPosts]);
             setLoading(false);
         } catch (err) {
             setError(err.message);
@@ -87,9 +92,19 @@ export default function Feed(props) {
     }
 
     useEffect(() => {
-        getPosts();
+        getPosts(true); // Always show loading when component mounts
     }, []); // <- useEffect with the empty array this make the getPosts function call when the componenet is loaded
     // on the page
+    
+    // Refresh posts when component becomes visible (user returns from add post page)
+    useEffect(() => {
+        const handleFocus = () => {
+            getPosts(false); // Refresh without loading indicator
+        };
+        
+        window.addEventListener('focus', handleFocus);
+        return () => window.removeEventListener('focus', handleFocus);
+    }, []);
 
     // Always check the error before loading, because if there is an error
     // we know something went wrong with the fetch call, therefore the http request
