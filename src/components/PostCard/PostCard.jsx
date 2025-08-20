@@ -7,6 +7,10 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
     const [comment, setComment] = useState('');
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState(post.comments || []);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedComment, setSelectedComment] = useState(null);
+    const [editingComment, setEditingComment] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
     const likeIndex = post.likes.findIndex(
         (eachLike) => eachLike.username === user.username
     );
@@ -57,8 +61,31 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
             if (removeComment) {
                 removeComment(post._id, commentId);
             }
+            setShowModal(false);
         } catch (err) {
             console.error('Error deleting comment:', err);
+        }
+    }
+    
+    const handleEditComment = async () => {
+        if (editingComment.trim() && selectedComment) {
+            try {
+                const updatedComments = comments.map((c, index) => {
+                    if ((c._id || index) === (selectedComment._id || selectedComment.index)) {
+                        return {...c, text: editingComment.trim()};
+                    }
+                    return c;
+                });
+                
+                setComments(updatedComments);
+                setShowModal(false);
+                setIsEditing(false);
+                
+                // TODO: Call parent function for backend update
+                console.log('Editing comment:', selectedComment, 'to:', editingComment);
+            } catch (err) {
+                console.error('Error editing comment:', err);
+            }
         }
     }
 
@@ -136,17 +163,21 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                                     </div>
                                     {commentItem.username === user.username && (
                                         <button
-                                            onClick={() => handleDeleteComment(commentItem._id || index)}
+                                            onClick={() => {
+                                                setSelectedComment({...commentItem, index});
+                                                setEditingComment(commentItem.text);
+                                                setShowModal(true);
+                                            }}
                                             style={{
                                                 background: 'none',
                                                 border: 'none',
-                                                color: '#ed4956',
-                                                fontSize: '12px',
+                                                color: '#8e8e8e',
+                                                fontSize: '16px',
                                                 cursor: 'pointer',
                                                 padding: '2px 4px'
                                             }}
                                         >
-                                            Delete
+                                            ⋯
                                         </button>
                                     )}
                                 </div>
@@ -190,6 +221,145 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                                 Post
                             </button>
                         </div>
+                    </div>
+                </div>
+            )}
+            
+            {/* Comment Options Modal */}
+            {showModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1000
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '8px',
+                        padding: '20px',
+                        maxWidth: '400px',
+                        width: '90%',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)'
+                    }}>
+                        {!isEditing ? (
+                            <>
+                                <h3 style={{margin: '0 0 16px 0', fontSize: '16px', color: '#262626'}}>Comment Options</h3>
+                                
+                                <button
+                                    onClick={() => setIsEditing(true)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        margin: '8px 0',
+                                        backgroundColor: '#0095f6',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    Edit Comment
+                                </button>
+                                
+                                <button
+                                    onClick={() => handleDeleteComment(selectedComment._id || selectedComment.index)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        margin: '8px 0',
+                                        backgroundColor: '#ed4956',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    Delete Comment
+                                </button>
+                                
+                                <button
+                                    onClick={() => setShowModal(false)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        margin: '8px 0',
+                                        backgroundColor: '#f5f5f5',
+                                        color: '#262626',
+                                        border: 'none',
+                                        borderRadius: '4px',
+                                        cursor: 'pointer',
+                                        fontSize: '14px'
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                <h3 style={{margin: '0 0 16px 0', fontSize: '16px', color: '#262626'}}>Edit Comment</h3>
+                                
+                                <textarea
+                                    value={editingComment}
+                                    onChange={(e) => setEditingComment(e.target.value)}
+                                    style={{
+                                        width: '100%',
+                                        padding: '12px',
+                                        border: '1px solid #dbdbdb',
+                                        borderRadius: '4px',
+                                        fontSize: '14px',
+                                        minHeight: '80px',
+                                        resize: 'vertical',
+                                        marginBottom: '12px'
+                                    }}
+                                    placeholder="Edit your comment..."
+                                />
+                                
+                                <div style={{display: 'flex', gap: '8px'}}>
+                                    <button
+                                        onClick={handleEditComment}
+                                        style={{
+                                            flex: 1,
+                                            padding: '12px',
+                                            backgroundColor: '#0095f6',
+                                            color: 'white',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            cursor: 'pointer',
+                                            fontSize: '14px'
+                                        }}
+                                    >
+                                        Save
+                                    </button>
+                                    
+                                    <button
+                                        onClick={() => {
+                                            setIsEditing(false);
+                                            setEditingComment(selectedComment.text);
+                                        }}
+                                        style={{
+                                            flex: 1,
+                                            padding: '12px',
+                                            backgroundColor: '#f5f5f5',
+                                            color: '#262626',
+                                            border: 'none',
+                                            borderRadius: '4px',
+                                            cursor: 'pointer',
+                                            fontSize: '14px'
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
             )}
