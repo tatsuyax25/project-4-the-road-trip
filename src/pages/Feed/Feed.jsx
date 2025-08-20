@@ -51,6 +51,28 @@ export default function Feed(props) {
             setError(err.message)
         }
     }
+    
+    async function addComment(postId, comment) {
+        try {
+            console.log('Adding comment to post:', postId, comment);
+            // TODO: Implement backend API call for comments
+            // For now, just update local state
+        } catch (err) {
+            console.log(err)
+            setError(err.message)
+        }
+    }
+    
+    async function removeComment(postId, commentId) {
+        try {
+            console.log('Removing comment:', commentId, 'from post:', postId);
+            // TODO: Implement backend API call for comment deletion
+            // For now, just update local state
+        } catch (err) {
+            console.log(err)
+            setError(err.message)
+        }
+    }
 
     async function getPosts(showLoading) {
         try {
@@ -90,6 +112,8 @@ export default function Feed(props) {
                 user={props.user}
                 addLike={addLike}
                 removeLike={removeLike}
+                addComment={addComment}
+                removeComment={removeComment}
             />
         </div>
     );

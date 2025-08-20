@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PostCard({ post, isProfile, user, removeLike, addLike }) {
+function PostCard({ post, isProfile, user, removeLike, addLike, addComment, removeComment }) {
     const [comment, setComment] = useState('');
     const [showComments, setShowComments] = useState(false);
+    const [comments, setComments] = useState(post.comments || []);
     const likeIndex = post.likes.findIndex(
         (eachLike) => eachLike.username === user.username
     );
@@ -24,7 +25,41 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
     const deleteHandler = (e) => {
         e.preventDefault()
         console.log("click")
-
+    }
+    
+    const handleAddComment = async () => {
+        if (comment.trim()) {
+            try {
+                const newComment = {
+                    text: comment.trim(),
+                    username: user.username,
+                    _id: Date.now() // Temporary ID until backend is implemented
+                };
+                
+                setComments([...comments, newComment]);
+                setComment('');
+                
+                // Call parent function if provided
+                if (addComment) {
+                    addComment(post._id, newComment);
+                }
+            } catch (err) {
+                console.error('Error adding comment:', err);
+            }
+        }
+    }
+    
+    const handleDeleteComment = async (commentId) => {
+        try {
+            setComments(comments.filter((c, index) => (c._id || index) !== commentId));
+            
+            // Call parent function if provided
+            if (removeComment) {
+                removeComment(post._id, commentId);
+            }
+        } catch (err) {
+            console.error('Error deleting comment:', err);
+        }
     }
 
 
@@ -88,15 +123,32 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
             {showComments && (
                 <div className="comments-section">
                     <div className="comments-list" style={{padding: '0 16px', maxHeight: '200px', overflowY: 'auto'}}>
-                        {post.comments && post.comments.length > 0 ? (
-                            post.comments.map((comment, index) => (
-                                <div key={index} className="comment-item" style={{marginBottom: '8px'}}>
-                                    <span style={{fontWeight: '600', fontSize: '14px', color: '#262626'}}>
-                                        {comment.username}
-                                    </span>
-                                    <span style={{fontSize: '14px', color: '#262626', marginLeft: '8px'}}>
-                                        {comment.text}
-                                    </span>
+                        {comments && comments.length > 0 ? (
+                            comments.map((commentItem, index) => (
+                                <div key={index} className="comment-item" style={{marginBottom: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                    <div>
+                                        <span style={{fontWeight: '600', fontSize: '14px', color: '#262626'}}>
+                                            {commentItem.username}
+                                        </span>
+                                        <span style={{fontSize: '14px', color: '#262626', marginLeft: '8px'}}>
+                                            {commentItem.text}
+                                        </span>
+                                    </div>
+                                    {commentItem.username === user.username && (
+                                        <button
+                                            onClick={() => handleDeleteComment(commentItem._id || index)}
+                                            style={{
+                                                background: 'none',
+                                                border: 'none',
+                                                color: '#ed4956',
+                                                fontSize: '12px',
+                                                cursor: 'pointer',
+                                                padding: '2px 4px'
+                                            }}
+                                        >
+                                            Delete
+                                        </button>
+                                    )}
                                 </div>
                             ))
                         ) : (
@@ -120,20 +172,12 @@ function PostCard({ post, isProfile, user, removeLike, addLike }) {
                                 }}
                                 onKeyPress={(e) => {
                                     if (e.key === 'Enter' && comment.trim()) {
-                                        // Add comment functionality here
-                                        console.log('Adding comment:', comment);
-                                        setComment('');
+                                        handleAddComment();
                                     }
                                 }}
                             />
                             <button
-                                onClick={() => {
-                                    if (comment.trim()) {
-                                        // Add comment functionality here
-                                        console.log('Adding comment:', comment);
-                                        setComment('');
-                                    }
-                                }}
+                                onClick={handleAddComment}
                                 style={{
                                     background: 'none',
                                     border: 'none',
