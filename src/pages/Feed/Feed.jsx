@@ -33,7 +33,17 @@ export default function Feed(props) {
         try {
             const data = await likesApi.create(postId);
             console.log(data, ' <- this data the response from likes create')
-            getPosts()
+            
+            // Update the specific post in state instead of refreshing all posts
+            setPosts(posts.map(post => {
+                if (post._id === postId) {
+                    return {
+                        ...post,
+                        likes: [...post.likes, { username: props.user.username, _id: Date.now() }]
+                    };
+                }
+                return post;
+            }));
         } catch (err) {
             console.log(err)
             setError(err.message)
@@ -44,7 +54,14 @@ export default function Feed(props) {
         try {
             const data = await likesApi.removeLike(likesId);
             console.log(data, ' <- this is data the response from likes delete')
-            getPosts(false)
+            
+            // Update the specific post in state instead of refreshing all posts
+            setPosts(posts.map(post => {
+                return {
+                    ...post,
+                    likes: post.likes.filter(like => like._id !== likesId)
+                };
+            }));
         } catch (err) {
             console.log(err)
             setError(err.message)
@@ -70,6 +87,25 @@ export default function Feed(props) {
         } catch (err) {
             console.log(err)
             setError(err.message)
+        }
+    }
+    
+    async function deletePost(postId) {
+        try {
+            console.log('Deleting post:', postId);
+            
+            // Remove post from local state immediately for better UX
+            const updatedPosts = posts.filter(post => post._id !== postId);
+            setPosts(updatedPosts);
+            
+            // Call backend API to actually delete the post
+            await postsApi.deletePost(postId);
+            console.log('Post deleted successfully from database');
+        } catch (err) {
+            console.error('Error deleting post:', err);
+            setError(err.message);
+            // Refresh posts if deletion failed to restore the post
+            getPosts(false);
         }
     }
 
@@ -129,6 +165,7 @@ export default function Feed(props) {
                 removeLike={removeLike}
                 addComment={addComment}
                 removeComment={removeComment}
+                deletePost={deletePost}
             />
         </div>
     );

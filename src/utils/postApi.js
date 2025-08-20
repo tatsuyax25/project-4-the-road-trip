@@ -27,3 +27,17 @@ export function getAll() {
     })
 }
 
+export function deletePost(postId) {
+    return fetch(`${BASE_URL}delete`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + tokenService.getToken()
+        },
+        body: JSON.stringify({ id: postId })
+    }).then(res => {
+        if (res.ok) return res.json();
+        throw new Error('Failed to delete post');
+    })
+}
+

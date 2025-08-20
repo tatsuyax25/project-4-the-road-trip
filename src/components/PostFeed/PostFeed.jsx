@@ -11,7 +11,8 @@ export default function PostFeed({
     addLike,
     removeLike,
     addComment,
-    removeComment
+    removeComment,
+    deletePost
 }) {
     return (
         <div className="ui cards" style={{display: 'grid', gridTemplateColumns: `repeat(${numPhotosCol}, 1fr)`, gap: '1rem'}}>
@@ -32,6 +33,7 @@ export default function PostFeed({
                         addLike={addLike}
                         addComment={addComment}
                         removeComment={removeComment}
+                        deletePost={deletePost}
                     />
                 );
             })}

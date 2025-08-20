@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PostCard({ post, isProfile, user, removeLike, addLike, addComment, removeComment }) {
+function PostCard({ post, isProfile, user, removeLike, addLike, addComment, removeComment, deletePost }) {
     const [comment, setComment] = useState('');
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState(post.comments || []);
@@ -11,6 +11,7 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
     const [selectedComment, setSelectedComment] = useState(null);
     const [editingComment, setEditingComment] = useState('');
     const [isEditing, setIsEditing] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const likeIndex = post.likes.findIndex(
         (eachLike) => eachLike.username === user.username
     );
@@ -27,8 +28,19 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
         
 
     const deleteHandler = (e) => {
-        e.preventDefault()
-        console.log("click")
+        e.preventDefault();
+        setShowDeleteModal(true);
+    }
+    
+    const confirmDelete = () => {
+        if (deletePost) {
+            deletePost(post._id);
+        }
+        setShowDeleteModal(false);
+    }
+    
+    const cancelDelete = () => {
+        setShowDeleteModal(false);
     }
     
     const handleAddComment = async () => {
@@ -141,13 +153,16 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                     </span>
                 </div>
                 
-                <span 
-                    className="ui icon" 
-                    style={{color: "#8e8e8e", fontSize: '18px'}} 
-                    onClick={deleteHandler}
-                >
-                    🗑️
-                </span>
+                {post.user.username === user.username && (
+                    <span 
+                        className="ui icon" 
+                        style={{color: "#ed4956", fontSize: '18px', cursor: 'pointer'}} 
+                        onClick={deleteHandler}
+                        title="Delete post"
+                    >
+                        🗑️
+                    </span>
+                )}
             </div>
             
             <div className="post-likes-count" style={{padding: '0 16px 8px'}}>
@@ -369,6 +384,76 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                                 </div>
                             </>
                         )}
+                    </div>
+                </div>
+            )}
+            
+            {/* Delete Post Confirmation Modal */}
+            {showDeleteModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 1000
+                }}>
+                    <div style={{
+                        backgroundColor: 'white',
+                        borderRadius: '8px',
+                        padding: '24px',
+                        maxWidth: '400px',
+                        width: '90%',
+                        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+                        textAlign: 'center'
+                    }}>
+                        <h3 style={{margin: '0 0 16px 0', fontSize: '18px', color: '#262626'}}>
+                            Delete Post?
+                        </h3>
+                        
+                        <p style={{margin: '0 0 24px 0', fontSize: '14px', color: '#8e8e8e'}}>
+                            Are you sure you want to delete this post? This action cannot be undone.
+                        </p>
+                        
+                        <div style={{display: 'flex', gap: '12px'}}>
+                            <button
+                                onClick={cancelDelete}
+                                style={{
+                                    flex: 1,
+                                    padding: '12px',
+                                    backgroundColor: '#f5f5f5',
+                                    color: '#262626',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    cursor: 'pointer',
+                                    fontSize: '14px',
+                                    fontWeight: '600'
+                                }}
+                            >
+                                No
+                            </button>
+                            
+                            <button
+                                onClick={confirmDelete}
+                                style={{
+                                    flex: 1,
+                                    padding: '12px',
+                                    backgroundColor: '#ed4956',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    cursor: 'pointer',
+                                    fontSize: '14px',
+                                    fontWeight: '600'
+                                }}
+                            >
+                                Yes
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}
