@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function PostCard({ post, isProfile, user, removeLike, addLike, addComment, removeComment, deletePost }) {
+function PostCard({ post, isProfile, user, removeLike, addLike, addComment, removeComment, deletePost, onFollow, onUnfollow, isFollowing }) {
     const [comment, setComment] = useState('');
     const [showComments, setShowComments] = useState(false);
     const [comments, setComments] = useState(post.comments || []);
@@ -126,6 +126,25 @@ function PostCard({ post, isProfile, user, removeLike, addLike, addComment, remo
                             </div>
                         </div>
                     </Link>
+                    
+                    {post.user.username !== user.username && (
+                        <button
+                            onClick={() => isFollowing ? onUnfollow(post.user._id) : onFollow(post.user._id)}
+                            style={{
+                                padding: '4px 12px',
+                                borderRadius: '4px',
+                                border: 'none',
+                                fontSize: '12px',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                backgroundColor: isFollowing ? '#f5f5f5' : '#0095f6',
+                                color: isFollowing ? '#262626' : 'white',
+                                marginLeft: 'auto'
+                            }}
+                        >
+                            {isFollowing ? 'Following' : 'Follow'}
+                        </button>
+                    )}
                 </div>
             )}
             

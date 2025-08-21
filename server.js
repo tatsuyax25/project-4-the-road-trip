@@ -55,6 +55,7 @@ app.use(require('./config/auth'));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/posts', require('./routes/api/posts'));
 app.use('/api/likes', require('./routes/api/likes'));
+app.use('/api/follows', require('./routes/api/follows'));
 
 // "catch all" route - serve React app
 app.get('/*', function(req, res) {
